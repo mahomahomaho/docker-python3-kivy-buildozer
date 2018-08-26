@@ -46,13 +46,6 @@ RUN set -ex \
  && chown kivy:users /src
 
 RUN set -ex \
- && sudo -u kivy -i \
- && cd /opt \
- && wget -q https://www.crystax.net/download/crystax-ndk-10.3.2-linux-x86_64.tar.xz \
- && bsdtar xf crystax-ndk-10.3.2-linux-x86_64.tar.xz \
- && rm crystax-ndk-10.3.2-linux-x86_64.tar.xz
-
-RUN set -ex \
  && pip install --trusted-host pypi.python.org -r requirements-INSTALL-FIRST.txt \
  && pip install --trusted-host pypi.python.org -r requirements.txt
 
@@ -65,6 +58,12 @@ RUN set -ex \
  && python setup.py build \
  && pip install . \
  && cd .. && rm -rf buildozer \
- && mv /usr/local/bin/buildozer /bin/buildozer
+ && mv /usr/local/bin/buildozer /usr/bin/buildozer
+
+# The entry.sh is the buldozer script
+RUN set -ex \
+ && mv /src/entry.sh /usr/local/bin/buildozer
 
 USER kivy
+
+CMD "/usr/local/bin/buildozer"

@@ -49,7 +49,7 @@ To enable py3 support your buildozer.spec need to contain `python3crystax` in re
 requirements = python3crystax,kivy
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-android.ndk_path = /opt/crystax-ndk-10.3.2
+android.ndk_path = /home/kivy/crystax-ndk-10.3.2
 ```
 
 ### Additional

@@ -6,4 +6,4 @@ docker run --rm -it --privileged \
     -v /dev/bus/usb:/dev/bus/usb \
     -v buildozer:/home/kivy \
     wallneradam/kivy-buildozer \
-    buildozer
+    buildozer "$@"
