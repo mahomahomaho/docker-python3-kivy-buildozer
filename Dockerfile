@@ -44,7 +44,9 @@ RUN set -ex \
  && useradd kivy -mN \
  && echo "kivy:kivy" | chpasswd \
  && chown kivy:users /opt \
- && chown kivy:users /src
+ && chown kivy:users /src \
+ # This is needed for adb be able to access usb
+ && adduser kivy root
 
 RUN set -ex \
  && pip install --trusted-host pypi.python.org -r requirements-INSTALL-FIRST.txt \
@@ -65,7 +67,6 @@ RUN set -ex \
 RUN set -ex \
  && mv /src/entry.sh /usr/local/bin/buildozer \
  && mv /src/adb.sh /usr/local/bin/adb
-
 
 USER kivy
 
