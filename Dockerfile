@@ -34,6 +34,7 @@ RUN dpkg --add-architecture i386 \
         zlib1g:i386 \
         wget \
         ccache \
+        cmake \
  && apt-get clean
 
 ADD . /src
@@ -62,7 +63,9 @@ RUN set -ex \
 
 # The entry.sh is the buldozer script
 RUN set -ex \
- && mv /src/entry.sh /usr/local/bin/buildozer
+ && mv /src/entry.sh /usr/local/bin/buildozer \
+ && mv /src/adb.sh /usr/local/bin/adb
+
 
 USER kivy
 
