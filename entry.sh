@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CRYSTAX_VER="10.3.2"
 
