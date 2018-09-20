@@ -14,4 +14,10 @@ if [ ! -d /home/kivy/crystax-ndk-$CRYSTAX_VER ]; then
     popd
 fi
 
+# fixes source and target JDK version, refs https://github.com/kivy/buildozer/issues/625
+if [ -f /home/kivy/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml ];then
+    sed s/'name="java.source" value="1.5"'/'name="java.source" value="7"'/ -i /home/kivy/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml
+    sed s/'name="java.target" value="1.5"'/'name="java.target" value="7"'/ -i /home/kivy/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml
+fi
+
 /usr/bin/buildozer "$@"

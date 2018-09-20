@@ -63,10 +63,11 @@ RUN set -ex \
  && cd .. && rm -rf buildozer \
  && mv /usr/local/bin/buildozer /usr/bin/buildozer
 
-# The entry.sh is the buldozer script
+# The entry.sh is the buldozer script and run it to prefetch crystax
 RUN set -ex \
  && mv /src/entry.sh /usr/local/bin/buildozer \
- && mv /src/adb.sh /usr/local/bin/adb
+ && mv /src/adb.sh /usr/local/bin/adb \
+ && /usr/local/bin/buildozer version
 
 USER kivy
 
