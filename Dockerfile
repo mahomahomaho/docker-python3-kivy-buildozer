@@ -39,14 +39,15 @@ RUN dpkg --add-architecture i386 \
 
 ADD . /src
 WORKDIR /src
-
+ 
+# root and plugdev groups are needed for adb be able to access usb
 RUN set -ex \
- && useradd kivy -mN \
+ && useradd kivy -mN -G plugdev \
  && echo "kivy:kivy" | chpasswd \
  && chown kivy:users /opt \
  && chown kivy:users /src \
- # This is needed for adb be able to access usb
- && adduser kivy root
+ && adduser kivy root && adduser kivy plugdev
+
 
 RUN set -ex \
  && pip install --trusted-host pypi.python.org -r requirements-INSTALL-FIRST.txt \
@@ -67,7 +68,7 @@ RUN set -ex \
 RUN set -ex \
  && mv /src/entry.sh /usr/local/bin/buildozer \
  && mv /src/adb.sh /usr/local/bin/adb \
- && /usr/local/bin/buildozer version
+ && sudo -u kivy /usr/local/bin/buildozer version
 
 USER kivy
 
